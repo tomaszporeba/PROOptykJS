@@ -1,0 +1,11 @@
+{
+  "development": {
+    "baseUrl": "http://localhost:8904"
+  },
+  "qas": {
+    "baseUrl": "https://prooptyk-qas.pl"
+  },
+  "production": {
+    "baseUrl": "https://prooptyk.pl"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "pro_optyk",
+    "password": "7Gk2O5Xo7ATcR3Nh",
+    "database": "pro_optyk",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "pro_optyk",
+    "password": "7Gk2O5Xo7ATcR3Nh",
+    "database": "pro_optyk",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "pro_optyk",
+    "password": "7Gk2O5Xo7ATcR3Nh",
+    "database": "pro_optyk",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
