@@ -93,8 +93,6 @@ AuthController.register = async (req,res,next) => {
     }
 };
 
-
-
 AuthController.login = async (req,res,next) => {
     let email = req.body.email;
     let password = req.body.password;

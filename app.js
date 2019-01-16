@@ -54,7 +54,7 @@ require('./auth');
 app.use('/', indexRouter);
 app.use('/auth', auth);
 app.use('/users',checkRoleWithPassport(['admin'], passport,'jwt', { session : false }), usersRouter);
-app.use('/api/v1',checkRoleWithPassport(['admin'], passport,'jwt', { session : false }), apiRouter);
+app.use('/api',checkRoleWithPassport(['admin'], passport,'jwt', { session : false }), apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
