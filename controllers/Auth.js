@@ -22,9 +22,8 @@ async function _onPassportAuth(req, res, error, user, info) {
             let userFiltered = {
                 id: user.id,
                 email: user.email,
-                name: user.name,
-                birthday: user.birthday,
-                image_url: user.image_url,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 token: "JWT " + token
             };
 

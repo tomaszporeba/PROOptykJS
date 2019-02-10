@@ -5,7 +5,7 @@ module.exports.isAuthorized  = function(req, res, next) {
             return next(error);
         } else {
             if (user === null) {
-                var err = new Error('Not authorized! Go back!');
+                let err = new Error('Not authorized! Go back!');
                 err.status = 400;
                 return next(err);
             } else {
@@ -13,4 +13,4 @@ module.exports.isAuthorized  = function(req, res, next) {
             }
         }
     });
-}
+};
