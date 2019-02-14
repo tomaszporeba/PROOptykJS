@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     accountNumber: DataTypes.INTEGER
   }, {});
   Invoice.associate = function(models) {
-    // associations can be defined here
+      Invoice.belongsTo(models.Client, {foreignKey:"clientId"})
   };
   return Invoice;
 };

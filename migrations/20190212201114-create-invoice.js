@@ -23,6 +23,13 @@ module.exports = {
       accountNumber: {
         type: Sequelize.INTEGER
       },
+        clientId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'Invoices',
+                key: 'id'
+            },
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,5 +1,5 @@
 const Examination = require('../models').Examination;
-const Client = require('../models').Client;
+const client = require('../models').Client;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -13,7 +13,7 @@ ExaminationController.find =  async (req, res, next) => {
         let examinations = await Examination.findAll({
             attributes: ['id', 'scheduledDate', 'rightEye', 'leftEye', 'createdAt', 'updatedAt'],
             include: [{
-                model: Client,
+                model: client,
                 attributes: {exclude : ['createdAt', 'updatedAt']}
             }]
             }
