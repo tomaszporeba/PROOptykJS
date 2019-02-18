@@ -32,4 +32,17 @@ EyeglassController.find =  async (req, res, next) => {
     }
 };
 
+EyeglassController.findById = async (req, res, next) => {
+    try {
+        let eyeglass = await Eyeglass.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.send(eyeglass)
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
 module.exports = EyeglassController;

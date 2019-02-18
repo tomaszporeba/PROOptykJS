@@ -9,6 +9,7 @@ const clientController = require('../controllers/clientController');
 // api
 
 router.get('/eyeglass', eyeglassController.find);
+router.get('/eyeglass/:id', eyeglassController.findById);
 router.get('/invoice', invoiceController.find);
 router.get('/examination', examinationController.find);
 router.get('/client', clientController.find);
