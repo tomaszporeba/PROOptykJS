@@ -21,5 +21,35 @@ ClientController.find =  async (req, res, next) => {
     }
 };
 
+ClientController.findById = async (req, res, next) => {
+    try {
+        let client = await Client.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.send(client)
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
+ClientController.createOrUpdate = async (req, res, next) => {
+    let client;
+    try {
+        client = await Client.findOne({
+            where: {id: req.body.id}
+        });
+        if (client) {
+            client.update(req.body)
+        } else {
+            client = await Client.create(req.body)
+        }
+        res.send(client);
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
 
 module.exports = ClientController;

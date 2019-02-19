@@ -14,6 +14,8 @@ router.post('/eyeglass/update', eyeglassController.createOrUpdate);
 router.get('/invoice', invoiceController.find);
 router.get('/examination', examinationController.find);
 router.get('/client', clientController.find);
+router.get('/client/:id', clientController.findById);
+router.post('/client/update', clientController.createOrUpdate);
 
 
 module.exports = router;
