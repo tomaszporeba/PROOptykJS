@@ -10,6 +10,7 @@ const clientController = require('../controllers/clientController');
 
 router.get('/eyeglass', eyeglassController.find);
 router.get('/eyeglass/:id', eyeglassController.findById);
+router.post('/eyeglass/update', eyeglassController.createOrUpdate);
 router.get('/invoice', invoiceController.find);
 router.get('/examination', examinationController.find);
 router.get('/client', clientController.find);

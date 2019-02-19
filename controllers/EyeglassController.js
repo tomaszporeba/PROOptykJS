@@ -45,4 +45,21 @@ EyeglassController.findById = async (req, res, next) => {
     }
 };
 
+EyeglassController.createOrUpdate = async (req, res, next) => {
+    let eyeglass;
+    try {
+        eyeglass = await Eyeglass.findOne({
+            where: {id: req.body.id}
+        });
+        if (eyeglass) {
+           eyeglass.update(req.body)
+        } else {
+            eyeglass = await Eyeglass.create(req.body)
+        }
+        res.send(eyeglass);
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
 module.exports = EyeglassController;
