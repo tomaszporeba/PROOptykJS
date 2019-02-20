@@ -31,4 +31,35 @@ InvoiceController.find =  async (req, res, next) => {
     }
 };
 
+InvoiceController.findById = async (req, res, next) => {
+    try {
+        let invoice = await Invoice.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.send(invoice)
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
+InvoiceController.createOrUpdate = async (req, res, next) => {
+    let invoice;
+    try {
+        invoice = await Invoice.findOne({
+            where: {id: req.body.id}
+        });
+        if (invoice) {
+            invoice.update(req.body)
+        } else {
+            invoice = await Invoice.create(req.body)
+        }
+        res.send(invoice);
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
+
 module.exports = InvoiceController;
