@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     salon: DataTypes.STRING
   }, {});
   Eyeglass.associate = function(models) {
-    // associations can be defined here
+      Eyeglass.hasMany(models.Client, {foreignKey: 'eyeglassId'});
   };
   return Eyeglass;
 };

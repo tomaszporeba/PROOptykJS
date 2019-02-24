@@ -17,6 +17,27 @@ module.exports = {
             phoneNumber: {
                 type: Sequelize.INTEGER
             },
+            leftEyeDefectOfVision: {
+                type: Sequelize.STRING
+            },
+            rightEyeDefectOfVision: {
+                type: Sequelize.STRING
+            },
+            eyeglassId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Eyeglasses',
+                    key: 'id'
+                },
+            },
+            orderDate: {
+                type: Sequelize.DATE,
+                allowNull: true
+            },
+            comments: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

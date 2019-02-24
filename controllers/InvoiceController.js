@@ -50,6 +50,9 @@ InvoiceController.createOrUpdate = async (req, res, next) => {
         invoice = await Invoice.findOne({
             where: {id: req.body.id}
         });
+        if (req.body.Client != undefined) {
+            req.body.clientId = req.body.Client.id
+        }
         if (invoice) {
             invoice.update(req.body)
         } else {

@@ -1,6 +1,7 @@
 const invoice = require('../models').Invoice;
 const Client = require('../models').Client;
 const Sequelize = require('sequelize');
+const Eyeglass = require('../models').Eyeglass;
 const Op = Sequelize.Op;
 
 let ClientController = {};
@@ -11,7 +12,11 @@ ClientController.find =  async (req, res, next) => {
 
     try {
         let clients = await Client.findAll({
-                attributes: ['id', 'name', 'lastName', 'phoneNumber', 'createdAt', 'updatedAt']
+            attributes: ['id', 'name', 'lastName', 'phoneNumber', 'leftEyeDefectOfVision', 'rightEyeDefectOfVision', 'orderDate', 'comments', 'createdAt', 'updatedAt'],
+            include: [{
+                model: Eyeglass,
+                attributes: {exclude : ['createdAt', 'updatedAt']}
+            }]
             }
         );
         res.send(clients);
