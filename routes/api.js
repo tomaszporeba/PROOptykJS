@@ -15,6 +15,8 @@ router.get('/invoice', invoiceController.find);
 router.get('/invoice/:id', invoiceController.findById);
 router.post('/invoice/update', invoiceController.createOrUpdate);
 router.get('/examination', examinationController.find);
+router.get('/examination/:id', examinationController.findById);
+router.post('/examination/update', examinationController.createOrUpdate);
 router.get('/client', clientController.find);
 router.get('/client/:id', clientController.findById);
 router.post('/client/update', clientController.createOrUpdate);

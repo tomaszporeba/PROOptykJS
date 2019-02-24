@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     vat: DataTypes.STRING,
     availability: DataTypes.INTEGER,
     color: DataTypes.STRING,
-    size: DataTypes.STRING,
+    size: DataTypes.INTEGER,
     salon: DataTypes.STRING
   }, {});
   Eyeglass.associate = function(models) {

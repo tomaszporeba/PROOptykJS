@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       size: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       salon: {
         type: Sequelize.STRING

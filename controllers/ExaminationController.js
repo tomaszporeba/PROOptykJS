@@ -25,5 +25,37 @@ ExaminationController.find =  async (req, res, next) => {
     }
 };
 
+ExaminationController.findById = async (req, res, next) => {
+    try {
+        let examination = await Examination.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.send(examination)
+    } catch (e) {
+        console.log(e.message)
+    }
+};
+
+ExaminationController.createOrUpdate = async (req, res, next) => {
+    let examination;
+    try {
+        examination = await Examination.findOne({
+            where: {id: req.body.id}
+        });
+        if (req.body.Client != undefined) {
+            req.body.clientId = req.body.Client.id
+        }
+        if (examination) {
+            examination.update(req.body)
+        } else {
+            examination = await Examination.create(req.body)
+        }
+        res.send(examination);
+    } catch (e) {
+        console.log(e.message)
+    }
+};
 
 module.exports = ExaminationController;
