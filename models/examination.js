@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     leftEye: DataTypes.STRING
   }, {});
   Examination.associate = function(models) {
-      Examination.belongsTo(models.Client, {foreignKey: 'ClientId'});
+      Examination.belongsTo(models.Client, {foreignKey: 'clientId'});
   };
   return Examination;
 };

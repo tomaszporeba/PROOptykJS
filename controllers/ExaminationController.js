@@ -45,6 +45,7 @@ ExaminationController.createOrUpdate = async (req, res, next) => {
             where: {id: req.body.id}
         });
         if (req.body.Client != undefined) {
+            console.log(req.body);
             req.body.clientId = req.body.Client.id
         }
         if (examination) {
