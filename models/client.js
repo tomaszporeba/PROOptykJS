@@ -1,4 +1,6 @@
 'use strict';
+const moment = require('moment');
+
 module.exports = (sequelize, DataTypes) => {
     const Client = sequelize.define('Client', {
         name: DataTypes.STRING,
@@ -6,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         phoneNumber: DataTypes.INTEGER,
         leftEyeDefectOfVision: DataTypes.STRING,
         rightEyeDefectOfVision: DataTypes.STRING,
-        orderDate: DataTypes.DATE,
+        orderDate: {
+            type: DataTypes.DATE
+        },
         comments: DataTypes.STRING
     }, {});
     Client.associate = function (models) {

@@ -2,6 +2,7 @@ const Examination = require('../models').Examination;
 const client = require('../models').Client;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const moment = require('moment');
 
 let ExaminationController = {};
 
