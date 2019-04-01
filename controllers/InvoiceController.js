@@ -1,5 +1,4 @@
-import {serverError} from "../middleware/responseType";
-
+const {serverError} = require('../middleware/responseType');
 const Invoice = require('../models').Invoice;
 const client = require('../models').Client;
 const Sequelize = require('sequelize');
