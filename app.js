@@ -11,6 +11,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const passport = require('passport');
 const checkRoleWithPassport= require('./middleware/acl');
+const errorResponse = require('./middleware/response');
 const multer  = require('multer');
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -60,6 +61,8 @@ app.use('/api',checkRoleWithPassport(['admin'], passport,'jwt', { session : fals
 app.use(function(req, res, next) {
     next(createError(404));
 });
+
+app.use(errorResponse);
 
 // error handler
 app.use(function(err, req, res, next) {

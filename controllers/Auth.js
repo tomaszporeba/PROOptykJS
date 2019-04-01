@@ -5,16 +5,10 @@ const salt = bcrypt.genSaltSync();
 let AuthController = {};
 const CipherService = require('../services/CipherService');
 const User = require('../models').User;
+const {accountNotFound, takenEmail, badRequest, serverError} = require('../middleware/responseType');
 
-async function _onPassportAuth(req, res, error, user, info) {
-    if (error) return res.status(500).json({
-        message: 'Server error',
-        user   : user
-    });
-    if (!user) return res.status(401).json({
-        message: 'Unauthorized'
-    });
 
+async function _onPassportAuth(req, res, next, error, user, info) {
 
     try {
         if (user != null) {
@@ -29,10 +23,7 @@ async function _onPassportAuth(req, res, error, user, info) {
 
             return res.send(userFiltered)
         } else {
-            return res.status(401).json({
-                message: 'Account not found',
-                user   : user
-            });
+            return next(accountNotFound());
         }
     } catch (e) {
         e.stackTrace
@@ -57,9 +48,7 @@ AuthController.register = async (req,res,next) => {
             }
         }).then(async function (user) {
             if (user) {
-                return res.status(406).json({
-                    message: 'Email is already taken'
-                });
+                return next(takenEmail())
             }
             else {
                 User.create({
@@ -69,12 +58,10 @@ AuthController.register = async (req,res,next) => {
                     password: password,
                     roleId: 1,
                     active: true
-                }).then(function (newUser, created) {
+                }).then(function (newUser) {
 
                     if (!newUser) {
-                        res.status(500).json({
-                            message: 'Server error'
-                        });
+                        return next(serverError('',"Error while creating user"))
                     }
 
                     if (newUser) {
@@ -86,41 +73,12 @@ AuthController.register = async (req,res,next) => {
         })
 
     } else {
-        return res.status(400).json({
-            message: 'Bad request'
-        });
+        return next(badRequest())
     }
 };
 
-AuthController.login = async (req,res,next) => {
-    let email = req.body.email;
-    let password = req.body.password;
-
-    if (email != null && password != null) {
-
-        let user = await User.findOne({where:{
-                email: email}
-        });
-
-        if (!user) return res.status(400).json({
-            message: 'Login failed'
-        });
-
-        if (user.active) {
-            passport.authenticate('local',
-                _onPassportAuth.bind(this, req, res))(req, res);
-        } else {
-            return res.status(400).json({
-                message: 'user is unactive',
-                user   : user
-            });
-        }
-
-    } else {
-        return res.status(500).json({
-            message: 'Bad request',
-        });
-    }
+AuthController.login = async (req, res, next) => {
+    passport.authenticate('local', _onPassportAuth.bind(this, req, res, next))(req, res, next);
 };
 
 
