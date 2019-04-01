@@ -2,13 +2,15 @@ const invoice = require('../models').Invoice;
 const Client = require('../models').Client;
 const Sequelize = require('sequelize');
 const Eyeglass = require('../models').Eyeglass;
+const {serverError} = require('../middleware/responseType');
+
 const Op = Sequelize.Op;
 
 let ClientController = {};
 
 ClientController.find =  async (req, res, next) => {
 
-    let param = req.query.search || '';
+    // let param = req.query.search || '';
 
     try {
         let clients = await Client.findAll({
@@ -22,7 +24,7 @@ ClientController.find =  async (req, res, next) => {
         res.send(clients);
 
     } catch (e) {
-        next(e)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -35,7 +37,7 @@ ClientController.findById = async (req, res, next) => {
         });
         res.send(client)
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -52,7 +54,7 @@ ClientController.createOrUpdate = async (req, res, next) => {
         }
         res.send(client);
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 

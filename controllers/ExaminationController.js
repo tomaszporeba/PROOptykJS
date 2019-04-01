@@ -2,7 +2,7 @@ const Examination = require('../models').Examination;
 const client = require('../models').Client;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const moment = require('moment');
+const {serverError} = require('../middleware/responseType');
 
 let ExaminationController = {};
 
@@ -22,7 +22,7 @@ ExaminationController.find =  async (req, res, next) => {
         res.send(examinations);
 
     } catch (e) {
-        next(e)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -35,7 +35,7 @@ ExaminationController.findById = async (req, res, next) => {
         });
         res.send(examination)
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -56,7 +56,7 @@ ExaminationController.createOrUpdate = async (req, res, next) => {
         }
         res.send(examination);
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 

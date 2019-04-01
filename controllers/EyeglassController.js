@@ -1,5 +1,6 @@
 const Eyeglass = require('../models').Eyeglass;
 const Sequelize = require('sequelize');
+const {serverError} = require('../middleware/responseType');
 const Op = Sequelize.Op;
 
 let EyeglassController = {};
@@ -28,7 +29,7 @@ EyeglassController.find =  async (req, res, next) => {
         res.send(eyeglasses);
 
     } catch (e) {
-        next(e)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -41,7 +42,7 @@ EyeglassController.findById = async (req, res, next) => {
         });
         res.send(eyeglass)
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -58,7 +59,7 @@ EyeglassController.createOrUpdate = async (req, res, next) => {
         }
         res.send(eyeglass);
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 

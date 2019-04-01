@@ -1,3 +1,5 @@
+import {serverError} from "../middleware/responseType";
+
 const Invoice = require('../models').Invoice;
 const client = require('../models').Client;
 const Sequelize = require('sequelize');
@@ -27,7 +29,7 @@ InvoiceController.find =  async (req, res, next) => {
         res.send(invoices);
 
     } catch (e) {
-        next(e)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -40,7 +42,7 @@ InvoiceController.findById = async (req, res, next) => {
         });
         res.send(invoice)
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 
@@ -60,7 +62,7 @@ InvoiceController.createOrUpdate = async (req, res, next) => {
         }
         res.send(invoice);
     } catch (e) {
-        console.log(e.message)
+        return next(serverError(500, e.message))
     }
 };
 
